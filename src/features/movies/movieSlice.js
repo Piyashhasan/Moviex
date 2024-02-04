@@ -7,11 +7,15 @@ const initialState = {
 export const movieSlice = createSlice({
   name: "movie",
   initialState,
-  reducers: {},
+  reducers: {
+    getUrlConfiguration: (state, action) => {
+      state.url = action.payload;
+    },
+  },
 });
 
 // --- export action ---
-// export const {} = movieSlice.actions;
+export const { getUrlConfiguration } = movieSlice.actions;
 
 // --- export reducer ---
 export default movieSlice.reducer;

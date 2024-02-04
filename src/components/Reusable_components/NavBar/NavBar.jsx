@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="container">
-      <div className="grid grid-cols-2 items-center gap-5 py-2 bg-black">
+      <div className="grid grid-cols-2 items-center gap-5 py-2">
         {/* --- logo side start --- */}
         <div>
           <img src={logo} alt="logo" />

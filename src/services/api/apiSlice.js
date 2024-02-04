@@ -1,29 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const token = import.meta.env.VITE_TOKEN;
+
 export const apiSlice = createApi({
   reducerPath: "api",
-  // baseQuery: fetchBaseQuery({
-  //   baseUrl: "https://jsonplaceholder.typicode.com/",
-  // }),
-  baseQuery: async (args, api, extraOptions) => {
-    const customHeaders = {
-      "Content-Type": "application/json", // Add any headers you need
-      Authorization: "Bearer ",
-    };
-    const result = await fetchBaseQuery({
-      baseUrl: "https://jsonplaceholder.typicode.com/", // Replace with your API base URL
-    })(args, api, { ...extraOptions, headers: customHeaders });
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://api.themoviedb.org/3/",
+  }),
 
-    return result;
-  },
   endpoints: (builder) => ({
-    getUsers: builder.query({
+    getConfiguration: builder.query({
       query: () => ({
-        url: "posts",
+        url: "configuration",
         method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    }),
+
+    getUpcomingMovies: builder.query({
+      query: () => ({
+        url: "movie/upcoming",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }),
     }),
   }),
 });
 
-export const { useGetUsersQuery } = apiSlice;
+export const { useGetConfigurationQuery, useGetUpcomingMoviesQuery } = apiSlice;
